@@ -12,3 +12,5 @@ def text_reply(msg):
 
 itchat.auto_login(enableCmdQR=2)
 itchat.run()
+
+# https://www.jianshu.com/p/d042ff5f4457
