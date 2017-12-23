@@ -85,6 +85,15 @@ def plot_images(CODE):
     plot_ma(a[0], a[1], a[2], a[3])
 
 for i in ashare_list:
-    plot_images('sh'+i)
-
+    try:
+        plot_images('sh'+i)
+    except:
+        pass
+    
+    
+for i in q3:
+    try:
+        plot_images(i)
+    except:
+        pass
 
