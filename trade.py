@@ -33,12 +33,33 @@ def login(username, password):
     se.evaluate("document.getElementById('ticket').value='%s'" % vcode)
     se.click('#submit', expect_loading=True)
 
-def stock():
-    stock = 'https://trade.cgws.com/cgi-bin/stock/EntrustQuery?function=MyAccount'
-    se.open(stock)
+def mystock():
+    # Mystock
+    mystock = 'https://trade.cgws.com/cgi-bin/stock/EntrustQuery?function=MyStock&stktype=0'
+    se.open(mystock)
+    mystock_html = se.content
+    mystock_soup = BeautifulSoup(mystock_html, "html.parser")
+    shares = mystock_soup.select('tr.tdheight')
+    # Mystock_data
+    num = len(shares) - 1
+    shares[1].select('td')
+    share_code = shares[1].select('td')
     
+def myaccount():
+    # Myaccount
+    myaccount = 'https://trade.cgws.com/cgi-bin/stock/EntrustQuery?function=MyAccount'
+    se.open(myaccount)
 
-
+def sell(code, price, amount):
+    sell = 'https://trade.cgws.com/cgi-bin/stock/StockEntrust?function=StockBusiness&type=S'
+    se.open(sell)
+    if code[0]+code[1] =='60':
+        se.evaluate("document.getElementById('secuid').selectedIndex='1'")
+    se.evaluate("document.getElementById('stkcode').value='%s'" % code)
+    se.evaluate("document.getElementById('price').value='%s'" % price)
+    se.evaluate("document.getElementById('amount').value='%s'" % amount)
+    se.click('#submit')
+    se.show()
 
 
 user = ''
