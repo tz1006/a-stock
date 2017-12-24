@@ -28,11 +28,13 @@ get_stocks_list()
 
 def check_stop(stock_code):
     print('Checking Stop %s...' % stock_code)
+    s = requests.session()
+    s.keep_alive = False
     header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0'}
     url = 'http://finance.ifeng.com/app/hq/stock/sh%s/' % stock_code
     html = None
     while html == None:
-        html = requests.get(url, headers=header, timeout=3).content
+        html = s.get(url, headers=header, timeout=3).content
     soup = BeautifulSoup(html, "html.parser")
     stop = soup.select('td.Hfont')[0].text
     if stop == '停牌':
