@@ -9,7 +9,7 @@ def get_stocks_list():
     url = 'http://query.sse.com.cn/security/stock/getStockListData2.do?&stockType=1&pageHelp.beginPage=1&pageHelp.pageSize=2000'
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0',
-        'Referer': 'http://www.sse.com.cn/assortment/stock/list/share/',
+        'Referer': 'http://www.sse.com.cn/assortment/stock/list/share/'
     }
     stock_data = requests.get(url, headers = header).json()['pageHelp']['data']
     for i in range(len(stock_data)):
